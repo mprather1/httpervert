@@ -1,11 +1,11 @@
 {
   "name": "httpervert",
-  "version": "1.0.14",
+  "version": "1.0.15",
   "description": "httpserver configuration",
   "main": "./build/server.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/mprather1/httpserver.git"
+    "url": "https://github.com/mprather1/httpervert.git"
   },
   "author": "Michael Prather",
   "license": "MIT",
