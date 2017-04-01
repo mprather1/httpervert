@@ -11,9 +11,7 @@ export default function getHTTPServer (options) {
   server.timeout = 12000
   
   server.on('request', function (req, res) {
-    if (environment === 'development') {
-      logger.info(chalk.cyan("processing..."))
-    }
+    logger.info(chalk.cyan("processing..."))
   })
   return server
 }
