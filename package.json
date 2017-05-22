@@ -1,8 +1,8 @@
 {
   "name": "httpervert",
-  "version": "1.1.6",
+  "version": "1.1.7",
   "description": "httpserver configuration",
-  "main": "./build/server.js",
+  "main": "./build/index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/mprather1/httpervert.git"
@@ -16,8 +16,7 @@
   "devDependencies": {
     "babel-cli": "^6.24.0",
     "babel-preset-es2015-node6": "^0.4.0",
-    "babel-preset-latest": "^6.24.0",
-    "morgan": "^1.8.1"
+    "babel-preset-latest": "^6.24.0"
   },
   "standard": {
     "globals": [
