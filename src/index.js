@@ -9,5 +9,10 @@ export default function getHTTPServer (options) {
   })
   server.timeout = 12000
 
+  process.on('SIGINT', function () {
+    console.log('\nGoodbye! Thanks for coming...')
+    process.exit()
+  })
+
   return server
 }
