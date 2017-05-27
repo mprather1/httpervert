@@ -3,9 +3,9 @@ import fs from 'fs'
 import chalk from 'chalk'
 
 export default function getHTTPServer (options) {
-  const {app, port, logger, packageName, config} = options
+  const {app, port, environment, logger, packageName, config} = options
 
-  const sslPath = config.sslPath['development'] + config.domainName + '/'
+  const sslPath = config.sslPath + config.domainName[environment] + '/'
 
   var serverConfig = {
     key: fs.readFileSync(sslPath + 'privkey.pem'),
