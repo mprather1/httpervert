@@ -5,7 +5,7 @@ import chalk from 'chalk'
 export default function getHTTPServer (options) {
   const {app, port, logger, packageName, config} = options
 
-  const sslPath = '/etc/letsencrypt/live/' + config.domainName + '/'
+  const sslPath = config.sslPath['development'] + config.domainName + '/'
 
   var serverConfig = {
     key: fs.readFileSync(sslPath + 'privkey.pem'),
