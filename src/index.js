@@ -2,32 +2,30 @@ import fs from 'fs'
 import chalk from 'chalk'
 
 export default function getHTTPServer (options) {
-  const {app, environment, logger, packageName, config} = options
+  const {app, environment, port, logger, packageName, config} = options
 
-  const sslPath = config.sslPath + config.domainName[environment] + '/'
-
-  var serverConfig = {
-    key: fs.readFileSync(sslPath + 'privkey.pem'),
-    cert: fs.readFileSync(sslPath + 'fullchain.pem')
+  var http
+  
+  if (environment === 'production') {
+    const sslPath = config.sslPath + config.domainName[environment] + '/'
+  
+    var serverConfig = {
+      key: fs.readFileSync(sslPath + 'privkey.pem'),
+      cert: fs.readFileSync(sslPath + 'fullchain.pem')
+    }    
+  
+    http = require('https').Server(serverConfig, app)
+  } else {
+    http = require('http').Server(app)
   }
-
-  const http = require('http').Server(app)
-  const https = require('https').Server(serverConfig, app)
-
-  const handleListening = function (port) {
+  
+  const handleListen = function () {
     logger.info(`${chalk.bgBlack.cyan(packageName)} listening on port ${chalk.green(port)}...`)
   }
   
-  http.addListener('listening', function () {
-    handleListening(80)
-  })
-  
-  https.addListener('listening', function () {
-    handleListening(8000)
-  })
+  http.addListener('listening', handleListen)
 
-  http.listen(8000)
-  https.listen(443)
+  http.listen(port)
   
   process.on('SIGINT', function () {
     console.log('\nGoodbye! Thanks for coming...')
