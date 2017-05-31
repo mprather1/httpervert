@@ -6,7 +6,7 @@ export default function getHTTPServer (options) {
   var http = require('http').Server(app)
 
   const handleListen = function () {
-    logger.info(`${chalk.bgBlack.cyan(packageName)} ver.${chalk.bgBlack.green(packageVersion)} listening on port ${chalk.green(port)}...`)
+    logger.info(`${chalk.bgBlack.cyan(packageName)} ver.${chalk.bgBlack.green(packageVersion)} listening on port ${chalk.bgBlack.yellow(port)}`)
   }
 
   http.on('listening', handleListen)
