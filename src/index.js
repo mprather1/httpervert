@@ -1,12 +1,12 @@
-import chalk from 'chalk'
+import {getAppInfo as info} from 'shintech-info'
 
 export default function getHTTPServer (options) {
-  const { app, port, logger, packageName, packageVersion } = options
+  const { app, port } = options
 
   var http = require('http').Server(app)
 
   const handleListen = function () {
-    logger.info(`${chalk.bgBlack.cyan(packageName)} ver.${chalk.bgBlack.green(packageVersion)} listening on port ${chalk.bgBlack.yellow(port)}`)
+    info(options)
   }
 
   http.on('listening', handleListen)
