@@ -1,4 +1,4 @@
-import {getAppInfo as info} from 'shintech-info'
+import {getAppInfo as info} from '../../shintech-info/src'
 
 export default function getHTTPServer (options) {
   const { app, port } = options
@@ -11,7 +11,7 @@ export default function getHTTPServer (options) {
 
   http.on('listening', handleListen)
 
-  http.listen(port)
+  http.listen(port, 'localhost')
 
   process.on('SIGINT', function () {
     console.log('\nGoodbye! Thanks for coming...')
