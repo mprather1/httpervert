@@ -11,7 +11,7 @@ export default function getHTTPServer (options) {
 
   http.on('listening', handleListen)
 
-  http.listen(port, 'localhost')
+  http.listen(port)
 
   process.on('SIGINT', function () {
     console.log('\nGoodbye! Thanks for coming...')
