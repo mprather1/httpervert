@@ -1,4 +1,4 @@
-import {getAppInfo as info} from '../../shintech-info/src'
+import {getAppInfo as info} from 'shintech-info'
 
 export default function getHTTPServer (options) {
   const { app, port } = options
