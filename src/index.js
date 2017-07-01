@@ -17,4 +17,6 @@ export default function getHTTPServer (options) {
     console.log('\nGoodbye! Thanks for coming...')
     process.exit()
   })
+
+  return http
 }
