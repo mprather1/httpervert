@@ -1,31 +1,26 @@
-import chalk from 'chalk'
+import express from 'express'
 import http from 'http'
+import winston from 'winston'
+import configApp from './app'
+import configServer from './server'
 
-export default function getHTTPServer (options) {
-  const { app, port, logger, packageDir } = options
-
-  const server = http.Server(app)
-
-  const packageName = packageDir.name
-  const packageVersion = packageDir.version
-
-  function handleListening () {
-    logger.info(`${chalk.bgBlack.cyan(packageName)} ver.${chalk.bgBlack.green(packageVersion)} listening on port ${chalk.bgBlack.yellow(port)}`)
+export default class HTTPervert {
+  constructor (router, config) {
+    this.app = express()
+    this.server = http.Server(this.app)
+    this.options = {
+      port: process.env.PORT || 8000,
+      environment: process.env.NODE_ENV || 'development',
+      logger: winston,
+      pkg: config.pkg,
+      router: router,
+      config: config
+    }
   }
+}
 
-  function handleRequest (req, res, next) {
-    logger.info(`${chalk.yellow(res.statusCode)} - ${chalk.green(req.method)} => ${req.url}`)
-  }
-
-  server.on('listening', handleListening)
-
-  server.on('request', handleRequest)
-  server.listen(port)
-
-  process.on('SIGINT', function () {
-    console.log('\nGoodbye! Thanks for coming...')
-    process.exit()
-  })
-
-  return server
+HTTPervert.prototype.start = function () {
+  configServer(this.server, this.options)
+  configApp(this.app, this.options)
+  this.server.listen(this.options.port)
 }
