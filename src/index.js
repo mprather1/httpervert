@@ -9,10 +9,15 @@ export default class HTTPervert {
     this.server = http.Server(this.app)
     this.router = router
     this.options = options
+    this.init()
+  }
+
+  init () {
+    configServer(this.server, this.options)
+    configApp(this.app, this.router, this.options)
   }
 }
 
-HTTPervert.prototype.start = function () {
-  configServer(this.server, this.options)
-  configApp(this.app, this.router, this.options)
+HTTPervert.prototype.listen = function (port) {
+  this.server.listen(port)
 }

@@ -8,24 +8,22 @@ Create http server and express app
 
 #### index.js
 
-      import path from 'path'
-      import winston from 'winston'
-      import HTTPervert from 'httpervert'
-      import getRouter from './routes'
+    import HTTPervert from 'httpervert'
+    import path from 'path'
+    import winston from 'winston'
+    import getRouter from './routes'
+    
+    const _package = require(path.join(path.dirname(__dirname), 'package.json'))
       
-      const _package = require(path.join(path.dirname(__dirname), 'package.json'))
-        
-      var options = {
-        port: process.env.PORT || 8000,
-        environment: process.env.NODE_ENV || 'development',
-        pkg: _package,
-        logger: winston
-      }
-      
-      const server = new HTTPervert(getRouter(options), options)
-          
-      server.start()
-      server.listen(options.port)
+    var options = {
+      port: process.env.PORT || 8000,
+      environment: process.env.NODE_ENV || 'development',
+      pkg: _package,
+      logger: winston
+    }
+    
+    const server = new HTTPervert(getRouter(options), options)
+    server.listen(options.port)
 
 #### routes.js
 
