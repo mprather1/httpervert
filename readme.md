@@ -6,8 +6,10 @@ Create http server and express app
 
 ### Usage
 
-    import HTTPervert from 'httpervert'
+    import path from 'path'
+    import winston from 'winston'
     import {Router} from 'express'
+    import HTTPervert from 'httpervert'
     
     const router = Router()
 
@@ -19,9 +21,14 @@ Create http server and express app
         body: 'test'
       })
     })
+
+    const options = {
+      port: process.env.PORT || 8000,
+      environment: process.env.NODE_ENV || 'development',
+      pkg: _package,
+      router: router,
+      logger: winston
+    }
       
-    const server = new HTTPervert(router, {
-      pkg: _package
-    })
-    
+    const server = new HTTPervert(options)
     server.start()
