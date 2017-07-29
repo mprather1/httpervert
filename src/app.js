@@ -1,8 +1,6 @@
 import bodyParser from 'body-parser'
 
-export default function configApp (app, options) {
-  const { router } = options
-
+export default function configApp (app, router, options) {
   app.use(bodyParser.urlencoded({ extended: true }))
   app.use(bodyParser.json())
 
