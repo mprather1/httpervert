@@ -25,6 +25,7 @@ Create http server and express app
       const server = new HTTPervert(getRouter(options), options)
           
       server.start()
+      server.listen(options.port)
 
 #### routes.js
 

@@ -15,5 +15,4 @@ export default class HTTPervert {
 HTTPervert.prototype.start = function () {
   configServer(this.server, this.options)
   configApp(this.app, this.router, this.options)
-  this.server.listen(this.options.port)
 }
