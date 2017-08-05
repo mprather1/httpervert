@@ -9,13 +9,20 @@ export default function configServer (server, options) {
 
   server.on('request', (req, res, next) => {
     const status = getStatusCodeStyle(res.statusCode)
-    logger[status.level](`${chalk.yellow(req.method)} - ${status.code} => ${req.url} ${status.message}`)
+    logger[status.level](`${status.code} - ${chalk.yellow(req.method)} => ${req.url} ${status.message}`)
+  })
+
+  server.on('error', err => {
+    logger.error(err)
   })
 
   return server
 }
 
 function getStatusCodeStyle (status) {
-  if (status === 400) return { code: chalk.red(status), level: 'error', message: '--- 404 - Not Found' }
-  if (status === 200) return { code: chalk.green(status), level: 'info', message: '' }
+  if (status === 400) {
+    return { code: chalk.red(status), level: 'error', message: '--- Not Found' }
+  } else {
+    return { code: chalk.green(status), level: 'info', message: '' }
+  }
 }

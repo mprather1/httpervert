@@ -1,6 +1,8 @@
 import bodyParser from 'body-parser'
 
 export default function configApp (app, router, options) {
+  const { logger } = options
+
   app.use(bodyParser.urlencoded({ extended: true }))
   app.use(bodyParser.json())
 
@@ -12,6 +14,10 @@ export default function configApp (app, router, options) {
       status: 'error',
       message: '404: Not Found'
     })
+  })
+
+  app.on('error', err => {
+    logger.error(err)
   })
 
   return app
