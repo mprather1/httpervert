@@ -14,7 +14,6 @@ export default class HTTPervert {
 
   init () {
     configServer(this.server, this.options)
-    configApp(this.app, this.router, this.options)
 
     if (this.options.publicDir !== undefined) {
       this.app.use(express.static(this.options.publicDir))
@@ -23,6 +22,8 @@ export default class HTTPervert {
     if (this.options.staticDir !== undefined) {
       this.app.use('/css', express.static(this.options.staticDir))
     }
+
+    configApp(this.app, this.router, this.options)
   }
 }
 
