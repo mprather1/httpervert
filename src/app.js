@@ -1,10 +1,21 @@
+import express from 'express'
 import bodyParser from 'body-parser'
 
-export default function configApp (app, router, options) {
+export default function configApp (options) {
   const { logger } = options
+  const app = express()
+  const router = express.Router()
 
   app.use(bodyParser.urlencoded({ extended: true }))
   app.use(bodyParser.json())
+
+  if (options.publicDir !== undefined) {
+    app.use(express.static(options.publicDir))
+  }
+
+  if (options.resources !== undefined) {
+    app.use('/resources', express.static(options.resources))
+  }
 
   app.use('/api', router)
 
@@ -20,5 +31,8 @@ export default function configApp (app, router, options) {
     logger.error(err)
   })
 
-  return app
+  return {
+    app: app,
+    router: router
+  }
 }

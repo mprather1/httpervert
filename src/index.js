@@ -1,29 +1,13 @@
-import express from 'express'
-import http from 'http'
 import configApp from './app'
 import configServer from './server'
 
 export default class HTTPervert {
-  constructor (router, options) {
-    this.app = express()
-    this.server = http.Server(this.app)
+  constructor (options) {
+    const {app, router} = configApp(options)
+
+    this.app = app
     this.router = router
-    this.options = options
-    this.init()
-  }
-
-  init () {
-    configServer(this.server, this.options)
-
-    if (this.options.publicDir !== undefined) {
-      this.app.use(express.static(this.options.publicDir))
-    }
-
-    if (this.options.staticDir !== undefined) {
-      this.app.use('/css', express.static(this.options.staticDir))
-    }
-
-    configApp(this.app, this.router, this.options)
+    this.server = configServer(this.app, options)
   }
 }
 

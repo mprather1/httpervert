@@ -1,6 +1,6 @@
 {
   "name": "httpervert",
-  "version": "3.5.3",
+  "version": "3.6.0",
   "description": "httpserver configuration",
   "main": "./build/index.js",
   "repository": {

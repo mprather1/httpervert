@@ -11,19 +11,30 @@ Create http server and express app
     import HTTPervert from 'httpervert'
     import path from 'path'
     import winston from 'winston'
-    import getRouter from './routes'
     
     const _package = require(path.join(path.dirname(__dirname), 'package.json'))
-      
+    
     var options = {
       port: process.env.PORT || 8000,
       environment: process.env.NODE_ENV || 'development',
       pkg: _package,
-      logger: winston
+      logger: winston,
+      resources: path.join(path.dirname(__dirname), 'resources'),
+      publicDir: path.join(path.dirname(__dirname), 'public')
     }
     
-    const server = new HTTPervert(getRouter(options), options)
-    server.listen(options.port)
+    var httpervert = new HTTPervert(options)
+    
+    const { app, server, router } = httpervert
+    
+    app.set('view engine', 'ejs')
+    app.set('views', path.join(path.dirname(__dirname), 'views'))
+    
+    router.route('/')
+      .get(route.function)
+    
+    server.listen(8000)
+
 
 #### routes.js
 
