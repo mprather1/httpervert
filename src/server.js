@@ -6,7 +6,7 @@ export default function configServer (app, options) {
   const server = http.Server(app)
 
   server.on('listening', () => {
-    logger.info(`${chalk.bgBlack.cyan(pkg.name)} ver.${chalk.bgBlack.green(pkg.version)} listening on port ${chalk.bgBlack.yellow(port)}`)
+    logger.info(`${chalk.bgBlack.cyan(pkg.name)} ver.${chalk.bgBlack.green(pkg.version)} listening on port ${chalk.bgBlack.yellow(port)}...`)
   })
 
   server.on('request', (req, res, next) => {
