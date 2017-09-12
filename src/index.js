@@ -1,5 +1,6 @@
 import configApp from './app'
 import configServer from './server'
+import configNetServer from './net'
 
 export default class HTTPervert {
   constructor (options) {
@@ -8,6 +9,7 @@ export default class HTTPervert {
     this.app = app
     this.router = router
     this.server = configServer(this.app, options)
+    this.net = configNetServer(options)
   }
 }
 
