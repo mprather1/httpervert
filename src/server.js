@@ -2,11 +2,11 @@ import http from 'http'
 import chalk from 'chalk'
 
 export default function configServer (app, options) {
-  const { port, pkg, logger } = options
+  const { port, logger } = options
   const server = http.Server(app)
 
   server.on('listening', () => {
-    logger.info(`${chalk.bgBlack.cyan(pkg.name)} ver.${chalk.bgBlack.green(pkg.version)} listening on port ${chalk.bgBlack.yellow(port)}...`)
+    logger.info(`${chalk.magenta('http')} -> listening on port ${chalk.bgBlack.yellow(port)}...`)
   })
 
   server.on('request', (req, res, next) => {
